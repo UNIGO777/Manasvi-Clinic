@@ -1,11 +1,13 @@
 import express from 'express';
 import {
-  createPrescription,
-  getAllPrescriptions,
-  getPrescriptionById,
-  updatePrescription,
-  deletePrescription
-} from '../controllers/Prescription.js';
+  createPayment,
+  getAllPayments,
+  getPaymentById,
+  updatePayment,
+  deletePayment,
+  getPaymentsByPatient,
+  getPaymentsByStatus
+} from '../controllers/Payment.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -19,46 +21,64 @@ const errorHandler = (err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong!', error: err.message });
 };
 
-// Create a new prescription
+// Create a new payment
 router.post('/', async (req, res, next) => {
   try {
-    await createPrescription(req, res);
+    await createPayment(req, res);
   } catch (error) {
     next(error);
   }
 });
 
-// Get all prescriptions
+// Get all payments
 router.get('/', async (req, res, next) => {
   try {
-    await getAllPrescriptions(req, res);
+    await getAllPayments(req, res);
   } catch (error) {
     next(error);
   }
 });
 
-// Get a single prescription by ID
+// Get a single payment by ID
 router.get('/:id', async (req, res, next) => {
   try {
-    await getPrescriptionById(req, res);
+    await getPaymentById(req, res);
   } catch (error) {
     next(error);
   }
 });
 
-// Update a prescription
+// Update a payment
 router.put('/:id', async (req, res, next) => {
   try {
-    await updatePrescription(req, res);
+    await updatePayment(req, res);
   } catch (error) {
     next(error);
   }
 });
 
-// Delete a prescription
+// Delete a payment
 router.delete('/:id', async (req, res, next) => {
   try {
-    await deletePrescription(req, res);
+    await deletePayment(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get payments by patient ID
+router.get('/patient/:patientId', async (req, res, next) => {
+  try {
+    await getPaymentsByPatient(req, res);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get payments by status
+router.get('/status/:status', async (req, res, next) => {
+  try {
+    await getPaymentsByStatus(req, res);
   } catch (error) {
     next(error);
   }

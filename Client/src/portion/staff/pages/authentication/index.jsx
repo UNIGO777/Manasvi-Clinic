@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import AuthImage2 from '../authentication/staff.jpg'; 
+import AuthImage2 from './staff.jpg'; 
 
 // Ensure axios is installed by running: npm install axios
 // If you're using a development environment that supports it, you can add a comment like:
-// @ts-ignore
+// @ts-ignore;
 // import axios from 'axios';
-
 const AuthPage = () => {
   const [email, setEmail] = useState(""); // State for email input
   const [password, setPassword] = useState(""); // State for password input

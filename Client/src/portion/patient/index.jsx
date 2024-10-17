@@ -2,7 +2,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route,Navigate } from 'react-router-dom';
 import Authentication from './pages/authentication';
-import Home from './pages/Components/navbar/Home';
+import Home from './pages/Home';
 
 
 const NotFound = () => {

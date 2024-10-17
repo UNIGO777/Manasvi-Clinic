@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Nav_bar';
+import Navbar from './Components/navbar/Nav_bar';
 import Patient from '../assets/Patient.png';
 
 const Home = () => {

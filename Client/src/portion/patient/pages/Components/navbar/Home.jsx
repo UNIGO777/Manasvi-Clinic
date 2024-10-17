@@ -14,7 +14,11 @@ const Home = () => {
         <p className="text-xl mb-6">
           "Empowering health through compassionate care and cutting-edge technology."
         </p>
-        
+        <p className="mb-8 text-blue-100">
+          At HealthHub, we believe in a holistic approach to healthcare, 
+          combining traditional wisdom with modern innovations to provide 
+          the best possible care for our patients.
+        </p>
         <Link 
           to="/appointments" 
           className="bg-white text-blue-600 font-bold py-3 px-6 rounded-full hover:bg-blue-100 transition duration-300 ease-in-out self-start"

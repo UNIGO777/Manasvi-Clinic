@@ -2,6 +2,7 @@
 import React, { Suspense } from 'react';
 import { Routes, Route,Navigate } from 'react-router-dom';
 import Authentication from './pages/authentication';
+import Home from './pages/Components/navbar/Home';
 
 
 const NotFound = () => {
@@ -13,7 +14,8 @@ const Patient = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="authentication" element={<Authentication />} />
-        <Route path="/" element={<Navigate to="authentication" />} />
+        
+        <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

@@ -19,6 +19,7 @@ function App() {
           <Route path="/staff/*" element={<Staff />} />
           <Route path="/user/*" element={<Patient />} />
           <Route path="*" element={<NotFound />} />
+          
           {/* Add more routes as needed */}
         </Routes>
       </Suspense>

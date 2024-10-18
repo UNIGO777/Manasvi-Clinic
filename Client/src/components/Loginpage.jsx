@@ -10,7 +10,7 @@ function Loginpage() {
         <div>
            
             <Login />
-            
+            <Footer2 />
           
         </div>
     );

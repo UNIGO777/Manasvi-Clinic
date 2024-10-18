@@ -1,5 +1,5 @@
 import express from 'express';
-import { createStaff, getStaffById, updateStaffById, deleteStaffById } from '../controllers/StaffController.js';
+import { createStaff, getAllStaff, getStaffById, updateStaffById, deleteStaffById } from '../controllers/StaffController.js';
 
 const router = express.Router();
 
@@ -10,7 +10,8 @@ router.post('/staff', async (req, res) => {
     await createStaff(req, res);
   } catch (error) {
     // Handle any errors that occur during the creation of the staff member
-    res.status(500).json({ message: 'Error creating staff', error });
+    console.error(error.stack);
+    res.status(500).json({ message: 'Error creating staff', error: error.message });
   }
 });
 
@@ -21,7 +22,8 @@ router.get('/staff/:id', async (req, res) => {
     await getStaffById(req, res);
   } catch (error) {
     // Handle any errors that occur while fetching the staff member by ID
-    res.status(500).json({ message: 'Error fetching staff', error });
+    console.error(error.stack);
+    res.status(500).json({ message: 'Error fetching staff', error: error.message });
   }
 });
 
@@ -29,12 +31,13 @@ router.get('/staff/:id', async (req, res) => {
 router.get('/staff', async (req, res) => {
   try {
     // Fetch all staff members from the database
-    const staffMembers = await Staff.find();
+    const staffMembers = await getAllStaff();
     // Send the list of staff members as a JSON response
     res.status(200).json(staffMembers);
   } catch (error) {
     // Handle any errors that occur while fetching the staff members
-    res.status(500).json({ message: 'Error fetching staff members', error });
+    console.error(error.stack);
+    res.status(500).json({ message: 'Error fetching staff members', error: error.message });
   }
 });
 
@@ -45,7 +48,8 @@ router.put('/staff/:id', async (req, res) => {
     await updateStaffById(req, res);
   } catch (error) {
     // Handle any errors that occur while updating the staff member by ID
-    res.status(500).json({ message: 'Error updating staff', error });
+    console.error(error.stack);
+    res.status(500).json({ message: 'Error updating staff', error: error.message });
   }
 });
 
@@ -56,7 +60,8 @@ router.delete('/staff/:id', async (req, res) => {
     await deleteStaffById(req, res);
   } catch (error) {
     // Handle any errors that occur while deleting the staff member by ID
-    res.status(500).json({ message: 'Error deleting staff', error });
+    console.error(error.stack);
+    res.status(500).json({ message: 'Error deleting staff', error: error.message });
   }
 });
 

@@ -4,6 +4,9 @@ import ProtectedRoute from './hoc/ProtectedRoute';
 import Admin from './portion/admin';
 import Staff from './portion/staff';
 import Patient from './portion/patient';
+import BookAppointment from '../src/components/patient/BookAppointment';
+import Footer from '../src/components/patient/Footer';
+import Appointment from '../src/components/patient/Appointment'; 
 
 const NotFound = () => {
   return <div className="text-center text-2xl text-red-500">Page Not Found</div>;
@@ -22,6 +25,9 @@ function App() {
           
           {/* Add more routes as needed */}
         </Routes>
+         <Appointment/>
+        <BookAppointment/>
+        <Footer/>
       </Suspense>
     
   );

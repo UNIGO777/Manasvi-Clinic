@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Components/navbar/Nav_bar';
-import Patient from '../assets/Patient.png';
+import Patient from '../../../../src/assets/Patient.png';
 
 const Home = () => {
   return (

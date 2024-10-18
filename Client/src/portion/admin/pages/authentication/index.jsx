@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import AuthImage from '../authentication/img1.png'; 
+import AuthImage from '../../../../../src/assets/img1.png'; 
 
 const AuthPage = () => {
   const [email, setEmail] = useState(""); // State for email input

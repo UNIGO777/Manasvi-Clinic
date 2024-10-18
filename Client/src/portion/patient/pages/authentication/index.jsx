@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import AuthImage from './img.webp'; // Import your image here
+import AuthImage from '../../../../../src/assets/img.webp'; // Import your image here
 
 const AuthPage = () => {
   const [isSignUp, setIsSignUp] = useState(false); // State to toggle between sign-in and sign-up forms

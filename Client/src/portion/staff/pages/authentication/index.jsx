@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import AuthImage2 from './staff.jpg'; 
+import AuthImage2 from '../../../../../src/assets/staff.jpg'; 
 
 // Ensure axios is installed by running: npm install axios
 // If you're using a development environment that supports it, you can add a comment like:

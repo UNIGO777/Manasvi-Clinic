@@ -1,4 +1,4 @@
-import Prescription from '../models/Prescription';
+import Prescription from '../models/Prescription.js';
 import { validationResult } from 'express-validator';
 
 // Create a new prescription

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createAppointment, getAppointmentById, updateAppointmentById, deleteAppointmentById } from '../controllers/AppointmentController.js';
+import { createAppointment,getAllAppointments, getAppointmentById, updateAppointmentById, deleteAppointmentById } from '../controllers/AppointmentController.js';
 
 const router = express.Router();
 
@@ -35,6 +35,20 @@ router.get('/appointments/:id', async (req, res) => {
     res.status(500).json({ message: 'Error fetching appointment', error });
   }
 });
+
+// Route to get an appointment by ID
+router.get('/appointments/:id', async (req, res) => {
+  try {
+    const appointment = await getAppointmentById(req, res);
+    if (!appointment) {
+      return res.status(404).json({ message: 'Appointment not found' });
+    }
+    res.json(appointment);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching appointment', error });
+  }
+});
+
 
 // Route to update an appointment by ID
 router.put('/appointments/:id', async (req, res) => {

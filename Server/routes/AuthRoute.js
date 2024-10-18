@@ -1,6 +1,5 @@
 import express from 'express';
 import { register, login, getCurrentUser, updateUser, deleteUser } from '../controllers/AuthController.js';
-import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -27,10 +26,21 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-// Protected routes
-router.use(protect);
+// Inline protect function for protected routes
+const protect = (req, res, next) => {
+  const token = req.header('Authorization');
+  if (!token) {
+    return res.status(401).json({ message: 'Authorization denied, no token provided' });
+  }
+  
+  // You can add token validation logic here, e.g., verify the token
+  // If valid, call next(); otherwise, return an error
 
-router.get('/me', async (req, res, next) => {
+  next();
+};
+
+// Protected routes
+router.get('/me', protect, async (req, res, next) => {
   try {
     await getCurrentUser(req, res);
   } catch (error) {
@@ -38,7 +48,7 @@ router.get('/me', async (req, res, next) => {
   }
 });
 
-router.put('/update', async (req, res, next) => {
+router.put('/update', protect, async (req, res, next) => {
   try {
     await updateUser(req, res);
   } catch (error) {
@@ -46,7 +56,7 @@ router.put('/update', async (req, res, next) => {
   }
 });
 
-router.delete('/delete', async (req, res, next) => {
+router.delete('/delete', protect, async (req, res, next) => {
   try {
     await deleteUser(req, res);
   } catch (error) {

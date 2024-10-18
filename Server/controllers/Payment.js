@@ -1,4 +1,4 @@
-import Payment from '../models/Payment';
+import Payment from '../models/Payment.js';
 import { validationResult } from 'express-validator';
 
 // Create a new payment

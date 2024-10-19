@@ -6,11 +6,11 @@ const patientSchema = new mongoose.Schema({
   // First name of the patient
   firstName: {
     // User ID reference
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
+    // userId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'User',
+    //   required: true
+    // },
     // Array to store patient's medical history
     medicalHistory: [
       {

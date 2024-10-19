@@ -44,9 +44,9 @@ app.use('/api', (req, res, next) => {
 });
 
 // Define routes
-app.use('/api/appointments', appointmentRoutes);
+app.use('/api', appointmentRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/patient', patientRoutes);
+app.use('/api', patientRoutes);
 app.use('/api/prescription', prescriptionRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/staff', staffRoutes);

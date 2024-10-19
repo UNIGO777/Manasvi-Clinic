@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import Navbar from './Components/navbar/Nav_bar';
-import Patient from '../../../../src/assets/Patient.png';
+import Patient from '../../../../src/assets/paysent.png';
 import doctor from '../../../../src/assets/doctor.png';
 import medicine from '../../../../src/assets/medicine.png';
 import appointment from '../../../../src/assets/support.png';
@@ -47,7 +47,7 @@ const Home = () => {
         <div className="bg-gray-100 md:w-1/2 flex items-center justify-center">
           <div className="w-full h-full">
             <img 
-              src={Patient} 
+              src={handshake} 
               alt="HealthHub Clinic" 
               className="rounded-lg shadow-xl"
             />

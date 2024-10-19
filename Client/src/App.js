@@ -5,6 +5,7 @@ import Staff from './portion/staff';
 import Patient from './portion/patient';
 import Appointmentpage from '../src/components/Appointmentpage';
 import Loginpage from '../src/components/Loginpage';
+import Review from '../src/components/Review.jsx';
    
 
 const NotFound = () => {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/user/*" element={<Patient />} />
         <Route path="/appointment" element={<Appointmentpage />} />
         <Route path="/login" element={<Loginpage />} />
+        <Route path="/review" element={<Review/>} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>

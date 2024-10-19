@@ -7,6 +7,7 @@ import Patient from './portion/patient';
 import BookAppointment from '../src/components/patient/BookAppointment';
 import Footer from '../src/components/patient/Footer';
 import Appointment from '../src/components/patient/Appointment'; 
+import Reports from '../src/portion/patient/pages/Reports';
 
 const NotFound = () => {
   return <div className="text-center text-2xl text-red-500">Page Not Found</div>;
@@ -22,10 +23,11 @@ function App() {
           <Route path="/staff/*" element={<Staff />} />
           <Route path="/user/*" element={<Patient />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/reports" element={<Reports />} />
           
           {/* Add more routes as needed */}
         </Routes>
-         <Appointment/>
+        <Appointment/>
         <BookAppointment/>
         <Footer/>
       </Suspense>

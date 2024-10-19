@@ -8,10 +8,16 @@ const staffSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  // Specialization of the staff member
+  // Role of the staff member (e.g., Receptionist or Doctor)
+  role: {
+    type: String,
+    enum: ['Receptionist', 'Doctor'],
+    required: true
+  },
+  // Specialization of the staff member (only applicable for doctors)
   specialization: {
     type: String,
-    required: true,
+    required: function() { return this.role === 'Doctor'; }, // Required only if role is Doctor
     trim: true
   },
   // Available days for appointments
@@ -69,7 +75,7 @@ const staffSchema = new mongoose.Schema({
       }
     }
   ],
-  // Array to store medical records
+  // Array to store medical records (only applicable for doctors)
   medicalRecords: [
     {
       // Reference to the medical record
@@ -86,19 +92,19 @@ const staffSchema = new mongoose.Schema({
       // Diagnosis of the patient
       diagnosis: {
         type: String,
-        required: true,
+        required: function() { return this.role === 'Doctor'; }, // Required only if role is Doctor
         trim: true
       },
       // Treatment provided to the patient
       treatment: {
         type: String,
-        required: true,
+        required: function() { return this.role === 'Doctor'; }, // Required only if role is Doctor
         trim: true
       },
       // Date of the medical record
       date: {
         type: Date,
-        required: true
+        required: function() { return this.role === 'Doctor'; }, // Required only if role is Doctor
       },
       // Additional notes about the medical record
       notes: {

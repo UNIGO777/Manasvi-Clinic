@@ -5,16 +5,16 @@ import Staff from '../models/Staff.js';
 // Create a new appointment
 export const createAppointment = async (req, res) => {
   try {
-    const { patientId, doctorId, date, time, status, consultationType, notes } = req.body;
-
+    const { patientEmail, doctorId, date, time, status, consultationType, notes } = req.body;
     // Validate required fields
-    if (!patientId || !doctorId || !date || !time || !status || !consultationType) {
+    if (!patientEmail || !doctorId || !date || !time || !status || !consultationType) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    // Validate patient and doctor existence
-    const patient = await Patient.findById(patientId);
-    const doctor = await Staff.findById(doctorId);
+    // Validate patient existence by email
+  // Find the patient by email
+      const patient = await Patient.findOne({ email: patientEmail });
+      const doctor = await Staff.findById(doctorId);
 
     if (!patient) {
       return res.status(404).json({ message: 'Patient not found' });
@@ -26,7 +26,7 @@ export const createAppointment = async (req, res) => {
 
     // Create a new appointment instance
     const newAppointment = new Appointment({
-      patientId,
+      patientId: patient._id, // Use the patient's ID
       doctorId,
       date,
       time,

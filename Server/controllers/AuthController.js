@@ -1,6 +1,9 @@
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Ensure environment variables are loaded
 
 // Register a new user
 export const register = async (req, res) => {
@@ -29,7 +32,7 @@ export const register = async (req, res) => {
     await user.save();
 
     // Create JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: '1d'
     });
 
@@ -66,7 +69,7 @@ export const login = async (req, res) => {
     }
 
     // Create JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: '1d'
     });
 
@@ -88,7 +91,7 @@ export const login = async (req, res) => {
 // Get current user
 export const getCurrentUser = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.userId).select('-password');
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching user', error: error.message });
@@ -98,10 +101,10 @@ export const getCurrentUser = async (req, res) => {
 // Update user
 export const updateUser = async (req, res) => {
   try {
-    const { name, email, role } = req.body;
+    const { name, role } = req.body;
     const updatedUser = await User.findByIdAndUpdate(
-      req.user.id,
-      { name, email, role },
+      req.userId,
+      { name, role },
       { new: true, runValidators: true }
     ).select('-password');
 
@@ -115,15 +118,39 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// Delete user
+
+// Delete user by ID
 export const deleteUser = async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.user.id);
+    // Check if the user is authenticated
+    if (!req.userId) {
+      return res.status(401).json({ message: 'Authentication required' });
+    }
+
+    const userId = req.params.id; // Get user ID from URL parameters
+
+    // Check if the authenticated user has permission to delete (e.g., admin or self)
+    const authenticatedUser = await User.findById(req.userId);
+    if (authenticatedUser.role !== 'admin' && req.userId !== userId) {
+      return res.status(403).json({ message: 'Permission denied' });
+    }
+
+    const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
     res.json({ message: 'User deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting user', error: error.message });
+  }
+};
+
+// Delete all users
+export const deleteAllUsers = async (req, res) => {
+  try {
+    await User.deleteMany(); // Delete all users
+    res.json({ message: 'All users deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting all users', error: error.message });
   }
 };

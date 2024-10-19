@@ -3,6 +3,7 @@ import React, { Suspense } from 'react';
 import { Routes, Route,Navigate } from 'react-router-dom';
 import Authentication from './pages/authentication';
 import Home from './pages/Home';
+import Appointmentpage from '../../components/Appointmentpage';
 
 
 const NotFound = () => {
@@ -16,6 +17,8 @@ const Patient = () => {
         <Route path="authentication" element={<Authentication />} />
         
         <Route path="/" element={<Home />} />
+        <Route path="appointments" element={<Appointmentpage />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

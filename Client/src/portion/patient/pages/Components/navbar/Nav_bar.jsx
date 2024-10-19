@@ -6,15 +6,16 @@ const navItems = [
   { name: 'Services', path: '/services' },
   { name: 'About', path: '/about' },
   { name: 'Appointments', path: '/appointments' },
+  { name: 'Specialists', path: '/specialists' },
 ];
 
 const Navbar = () => {
   return (
-    <nav className="bg-white bg-opacity-10 backdrop-blur-md  shadow-lg p-8 px-20 fixed w-full">
+    <nav className="bg-black bg-opacity-25 backdrop-blur-md  shadow-lg p-8 px-20 fixed w-full">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <img src={Dash_logo} alt="Logo" className="h-12 w-auto mr-4" />
+            <img src={Dash_logo} alt="Logo" className="h-12 w-auto mr-4 " />
           </div>
           <div className="flex items-center space-x-6">
             {navItems.map((item) => (

@@ -8,9 +8,9 @@ import Appointment from '../components/patient/Appointment';
 function Appointmentpage() {
     return (
         <div>
-            <Appointment />
-            <BookAppointment />
-            <Footer />
+          <Appointment /> 
+            <BookAppointment /> 
+           <Footer />  
         
         </div>
     );

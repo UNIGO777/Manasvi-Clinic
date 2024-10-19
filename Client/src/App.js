@@ -6,6 +6,7 @@ import Patient from './portion/patient';
 import Appointmentpage from '../src/components/Appointmentpage';
 import Loginpage from '../src/components/Loginpage';
 import Review from '../src/components/Review.jsx';
+import Reports from '../src/portion/patient/pages/Reports.jsx';
    
 
 const NotFound = () => {
@@ -20,10 +21,10 @@ function App() {
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/staff/*" element={<Staff />} />
         <Route path="/user/*" element={<Patient />} />
-        <Route path="/appointment" element={<Appointmentpage />} />
+        <Route path="/Appointment" element={<Appointmentpage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/review" element={<Review/>} />
-        
+        <Route path="/reports" element={<Reports/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

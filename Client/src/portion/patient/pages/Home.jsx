@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import Navbar from './Components/navbar/Nav_bar';
-import Patient from '../../../../src/assets/Patient.png';
+import Patient from '../../../../src/assets/patient.png';
 import doctor from '../../../../src/assets/doctor.png';
 import medicine from '../../../../src/assets/medicine.png';
 import appointment from '../../../../src/assets/support.png';

@@ -1,5 +1,6 @@
 import express from 'express';
-import { register, login, getCurrentUser, updateUser, deleteUser } from '../controllers/AuthController.js';
+import { register, login, getCurrentUser, updateUser, deleteUser, deleteAllUsers } from '../controllers/AuthController.js'; // Updated to include deleteAllUsers
+import userMiddleware from '../middleware/User.js'; // Import user middleware for protected routes
 
 const router = express.Router();
 
@@ -26,29 +27,16 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-// Inline protect function for protected routes
-const protect = (req, res, next) => {
-  const token = req.header('Authorization');
-  if (!token) {
-    return res.status(401).json({ message: 'Authorization denied, no token provided' });
-  }
-  
-  // You can add token validation logic here, e.g., verify the token
-  // If valid, call next(); otherwise, return an error
-
-  next();
-};
-
 // Protected routes
-router.get('/me', protect, async (req, res, next) => {
-  try {
-    await getCurrentUser(req, res);
-  } catch (error) {
-    next(error);
-  }
-});
+// router.get('/me', userMiddleware, async (req, res, next) => {
+//   try {
+//     await getCurrentUser(req, res);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
-router.put('/update', protect, async (req, res, next) => {
+router.put('/update', userMiddleware, async (req, res, next) => {
   try {
     await updateUser(req, res);
   } catch (error) {
@@ -56,9 +44,19 @@ router.put('/update', protect, async (req, res, next) => {
   }
 });
 
-router.delete('/delete', protect, async (req, res, next) => {
+// Updated delete route to accept an ID parameter
+router.delete('/delete/:id', userMiddleware, async (req, res, next) => {
   try {
-    await deleteUser(req, res);
+    await deleteUserById(req, res); // Updated to call deleteUserById
+  } catch (error) {
+    next(error);
+  }
+});
+
+// New route to delete all users
+router.delete('/delete', userMiddleware, async (req, res, next) => {
+  try {
+    await deleteAllUsers(req, res); // Call to delete all users
   } catch (error) {
     next(error);
   }

@@ -10,11 +10,11 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
-<<<<<<< HEAD
+
     "framer-motion": "^11.11.9",
-=======
+
     "fortawesome": "^0.0.1-security",
->>>>>>> 70ae1584ed0b7dc40ba134c0c94eab4616f65538
+
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
